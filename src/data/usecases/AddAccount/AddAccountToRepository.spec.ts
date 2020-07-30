@@ -1,5 +1,5 @@
 import { AddAccountToRepository } from './AddAccountToRepository'
-import { Encrypter } from '../protocols/Encrypter'
+import { Encrypter } from './Protocols'
 
 interface SutTypes {
   sut: AddAccountToRepository
