@@ -76,4 +76,17 @@ describe('AddAccountToRepository', () => {
     await sut.add(accountData)
     expect(addSpy).toHaveBeenCalledWith({ ...accountData, password: 'hashed_password' })
   })
+
+  test('Should throw if AddAccountToDatabase throws', async () => {
+    const { sut, addAccountToRepositoryStub } = makeSut()
+    jest.spyOn(addAccountToRepositoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const accountData = {
+      name: 'valid_name',
+      email: 'valid_email',
+      password: 'hashed'
+    }
+
+    const promise = sut.add(accountData)
+    await expect(promise).rejects.toThrow()
+  })
 })
